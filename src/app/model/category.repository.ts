@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from "@angular/core";
 import { RestService } from "./rest.service";
-import { Category } from "./category.module";
+import { Category } from "./category.model";
 
 @Injectable()
 export class CategoryRepository implements OnInit {

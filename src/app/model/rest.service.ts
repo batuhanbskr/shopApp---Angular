@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from './product.model';
 import { Observable } from 'rxjs';
-import { Category } from './category.module';
+import { Category } from './category.model';
 
 @Injectable()
 export class RestService {
