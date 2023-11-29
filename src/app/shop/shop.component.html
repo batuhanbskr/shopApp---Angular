@@ -5,16 +5,16 @@
         <div class="col-3">
             <app-cart-summary></app-cart-summary>
             <div class="list-group">
-                <a href="#" (click)="changeCategory()" class="list-group-item list-group-item-action">
+                <button routerLink="/shop" (click)="changeCategory()" class="list-group-item list-group-item-action">
                     Tüm Kategoriler
-                </a>
-                <a *ngFor="let c of categories" 
+                </button>
+                <button *ngFor="let c of categories" 
                     (click)="changeCategory(c)" 
-                    href="#" 
+                    routerLink="/shop" 
                     class="list-group-item list-group-item-action"
                     [class.active]="c==selectedCategory">
                     {{ c.name }}
-                </a>
+            </button>
             </div>
         </div>
         <div class="col-9">

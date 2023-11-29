@@ -4,13 +4,11 @@ import { CategoryRepository } from '../model/category.repository';
 import { Product } from '../model/product.model';
 import { Category } from '../model/category.model';
 import { Cart } from "../model/cart.model";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'shop',
     templateUrl: 'shop.component.html',
-    styles: [`
-        .pt-100 {padding-top:100px;}
-    `]
 })
 export class ShopComponent {
     public selectedCategory: Category = null;
@@ -20,7 +18,8 @@ export class ShopComponent {
     constructor(
         private productRepository: ProductRepository,
         private categoryRepository: CategoryRepository,
-        private cart: Cart // CARTI INJECT ETTİK
+        private cart: Cart, // CARTI INJECT ETTİK
+        private router: Router
         ) { }
 
     get products(): Product[] {
@@ -52,5 +51,7 @@ export class ShopComponent {
 
     addProductToCart(product: Product){
         this.cart.addItem(product);
+        this.router.navigateByUrl('cart-detail');
+
     }
 }
