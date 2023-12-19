@@ -14,19 +14,20 @@ export class ShopComponent {
     public selectedCategory: Category = null;
     public productsPerPage = 2;
     public selectedPage = 1;
+    public selectedProducts: Product[] = [];
 
     constructor(
         private productRepository: ProductRepository,
-        private categoryRepository: CategoryRepository,
         private cart: Cart, // CARTI INJECT ETTİK
         private router: Router
-        ) { }
+    ) { }
 
     get products(): Product[] {
         let index = (this.selectedPage - 1) * this.productsPerPage;
 
-        return this.productRepository
+        this.selectedProducts = this.productRepository
             .getProducts(this.selectedCategory)
+        return this.selectedProducts
             .slice(index, index + this.productsPerPage);
     }
 
@@ -40,16 +41,17 @@ export class ShopComponent {
     changePage(p: number) {
         this.selectedPage = p;
     }
-
-    get categories(): Category[] {
-        return this.categoryRepository.getCategories();
+    changePageSize(size: number) {
+        this.productsPerPage = size;
+        this.changePage(1);
+    }
+    getCategory(category: Category) {
+        this.selectedCategory = category;
     }
 
-    changeCategory(newCategory?: Category) {
-        this.selectedCategory = newCategory;
-    }
 
-    addProductToCart(product: Product){
+
+    addProductToCart(product: Product) {
         this.cart.addItem(product);
         this.router.navigateByUrl('cart-detail');
 

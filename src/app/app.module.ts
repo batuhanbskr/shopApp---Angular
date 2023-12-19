@@ -16,10 +16,11 @@ import { CheckoutComponent } from './shop/checkout/checkout.component';
     BrowserModule,
     ShopModule,
     RouterModule.forRoot([
-      {path: 'shop', component: ShopComponent},
-      {path: 'cart-detail', component: CartDetailComponent},
-      {path: 'checkout', component: CheckoutComponent},
-      {path: '**', redirectTo: "/shop" }
+      { path: 'shop', component: ShopComponent },
+      { path: 'cart-detail', component: CartDetailComponent },
+      { path: 'checkout', component: CheckoutComponent },
+      { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+      { path: '**', redirectTo: "/shop" }
     ])
   ],
   providers: [],
