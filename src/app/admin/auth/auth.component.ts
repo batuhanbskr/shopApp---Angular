@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Authservice } from 'src/app/model/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -13,16 +14,17 @@ export class AuthComponent {
   public password: string;
   public errorMessage: string;
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private authService: Authservice){}
 
 
   login(form: NgForm){
     if(form.valid){
-      if(this.username==='admin' && this.password==='12345'){
-        this.router.navigateByUrl('/admin/main');
-      }else{
-        this.errorMessage = 'Hatalı username or password'
-      }
+      this.authService.authenticate(this.username, this.password).subscribe(response =>{
+        if(response){
+          this.router.navigateByUrl('admin/main');
+        }
+        this.errorMessage = 'HATALI USERNAME VEYA PAROLA';
+      })
     }else {
       this.errorMessage = 'Bilgiler Eksik'
     }
