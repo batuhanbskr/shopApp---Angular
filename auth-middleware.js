@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 
 const app_secret = "myappsecret";
-
 const username = "admin";
 const password = "secret";
 
@@ -20,8 +19,8 @@ module.exports = function (req, res, next) {
             req.url.startsWith("/categories")) && (req.method != 'GET')) {
             let token = req.headers['authorization'];
 
-            if (token != null && token.startsWith('Bearer< ')) {
-                token = token.substring(7, token.length);
+            if (token != null && token.startsWith('Bearer<')) {
+                token = token.substring(7, token.length-1);
                 try {
                     jwt.verify(token, app_secret);
                     next();
